@@ -1,5 +1,7 @@
+import AppRouter from "./routes/AppRouter";
+
 const App = () => {
-    return <div>EcoShelf</div>;
+    return <AppRouter />;
 };
 
 export default App;
