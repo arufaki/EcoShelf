@@ -2,8 +2,11 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
-        fontFamily: {},
+        fontFamily: {
+            poppins: ["Poppins", "sans-serif"],
+            kaushan: ["Kaushan Script", "serif"],
+        },
         extend: {},
     },
-    plugins: [],
+    plugins: [require("daisyui")],
 };
