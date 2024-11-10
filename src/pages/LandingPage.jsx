@@ -7,13 +7,15 @@ import ListBooks from "../components/organisms/LandingPage/ListBooks";
 
 const LandingPage = () => {
     return (
-        <Main className="max-w-[1440px] mx-auto">
+        <>
             <Header />
-            <Hero />
-            <About />
-            <ListBooks />
+            <Main className="max-w-[1440px] mx-auto">
+                <Hero />
+                <About />
+                <ListBooks />
+            </Main>
             <Footer />
-        </Main>
+        </>
     );
 };
 
