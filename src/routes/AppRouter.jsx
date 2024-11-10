@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "../pages/LandingPage";
+import BookDetailPage from "../pages/BookDetailPage";
 
 const AppRouter = () => {
     return (
@@ -11,6 +12,7 @@ const AppRouter = () => {
         >
             <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/detail" element={<BookDetailPage />} />
             </Routes>
         </Router>
     );
