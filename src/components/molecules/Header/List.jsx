@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const List = () => {
     return (
         <div className="navbar-start">
@@ -8,14 +10,19 @@ const List = () => {
                     </svg>
                 </div>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    <Link to="/">
+                        <li>
+                            <p className="text-green-600 hover:text-green-700 hover:bg-green-50">Homepage</p>
+                        </li>
+                    </Link>
+                    <Link to="/books">
+                        <li>
+                            <p className="text-green-600 hover:text-green-700 hover:bg-green-50">Books</p>
+                        </li>
+                    </Link>
+
                     <li>
-                        <a className="text-green-600 hover:text-green-700 hover:bg-green-50">Homepage</a>
-                    </li>
-                    <li>
-                        <a className="text-green-600 hover:text-green-700 hover:bg-green-50">Books</a>
-                    </li>
-                    <li>
-                        <a className="text-green-600 hover:text-green-700 hover:bg-green-50">About</a>
+                        <p className="text-green-600 hover:text-green-700 hover:bg-green-50">About</p>
                     </li>
                 </ul>
             </div>
