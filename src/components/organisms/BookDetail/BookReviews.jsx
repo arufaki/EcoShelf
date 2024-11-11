@@ -1,12 +1,12 @@
 import { Star } from "lucide-react";
 import { useAppContext } from "../../../context/AppContext";
 
-const BookReviews = () => {
+const BookReviews = ({ title, userProfile }) => {
     const { reviews } = useAppContext();
     return (
         <section>
             <div className="py-10 mx-auto px-5">
-                <h1 className="text-4xl font-bold text-green-700 font-poppins">Reader Reviews</h1>
+                <h1 className="text-lg font-bold text-green-700 font-poppins tracking-wide pb-5">{title}</h1>
                 <h2 className="text-2xl font-bold mb-4"></h2>
                 <div className="space-y-4">
                     {reviews.map((review) => (
@@ -31,6 +31,7 @@ const BookReviews = () => {
                                 </div>
                             </div>
                             <p className="text-gray-700 mt-2 px-12 font-poppins">{review.review}</p>
+                            {userProfile && <button className="btn btn-outline btn-success outline-none hover:!text-white mx-12 my-2">Edit Review</button>}
                         </div>
                     ))}
                 </div>

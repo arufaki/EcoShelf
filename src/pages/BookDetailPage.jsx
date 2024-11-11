@@ -12,7 +12,7 @@ const BookDetailPage = () => {
             <Main className="max-w-[1440px] mx-auto">
                 <BookInfo />
                 <BookSynopsis />
-                <BookReviews />
+                <BookReviews title="Reader Reviews" userProfile={false} />
             </Main>
             <Footer />
         </>
