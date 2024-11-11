@@ -1,7 +1,7 @@
 const bookInfo = {
     thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
     title: "Internet of Things and Big Data Analytics for a Green Environment",
-    author: ["Yousef Farhaoui", "Bharat Bhushan"],
+    author: ["Sugeng Sasmita", "Aji Barong", "Yousef Farhaoui", "Bharat Bhushan"],
     informationBook: {
         publisher: "CRC Press",
         publishedDate: "2024-01-15",
