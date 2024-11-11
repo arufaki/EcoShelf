@@ -2,34 +2,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import Card from "../../molecules/ListBooks/Card";
+import { useAppContext } from "../../../context/AppContext";
 
 const ListBooks = () => {
-    const booksData = [
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-    ];
+    const { books } = useAppContext();
+    const sliceBooks = books.slice(0, 8);
+    console.log(sliceBooks);
+
     return (
         <div className="w-full px-8 text-center">
             <h1 className="text-4xl sm:text-5xl font-bold text-green-700 pt-14 mb-8">List Books</h1>
@@ -65,7 +44,7 @@ const ListBooks = () => {
                 modules={[Pagination]}
                 className="mySwiper"
             >
-                {booksData.map((book, index) => (
+                {sliceBooks.map((book, index) => (
                     <SwiperSlide key={index} className="flex justify-center">
                         <Card book={book} />
                     </SwiperSlide>
