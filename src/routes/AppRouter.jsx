@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "../pages/LandingPage";
 import BookDetailPage from "../pages/BookDetailPage";
 import BooksPage from "../pages/BooksPage";
+import UserPage from "../pages/UserPage";
 
 const AppRouter = () => {
     return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/detail" element={<BookDetailPage />} />
                 <Route path="/books" element={<BooksPage />} />
+                <Route path="/profile" element={<UserPage />} />
             </Routes>
         </Router>
     );
