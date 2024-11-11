@@ -1,48 +1,11 @@
 import Card from "../components/molecules/ListBooks/Card";
 import Footer from "../components/organisms/Reusable/Footer";
 import Header from "../components/organisms/Reusable/Header";
+import { useAppContext } from "../context/AppContext";
 import Main from "../layouts/Main";
 
 const BooksPage = () => {
-    const booksData = [
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-        {
-            thumbnail: "http://books.google.com/books/content?id=f1gpEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-        },
-    ];
-
+    const { books } = useAppContext();
     return (
         <>
             <Header />
@@ -56,7 +19,7 @@ const BooksPage = () => {
                     }}
                     className="px-5 mx-auto py-14"
                 >
-                    {booksData.map((book, index) => (
+                    {books.map((book, index) => (
                         <Card book={book} key={index} />
                     ))}
                 </div>
