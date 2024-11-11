@@ -1,4 +1,5 @@
 import { User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ProfileHeader = () => {
     return (
@@ -15,9 +16,11 @@ const ProfileHeader = () => {
                     </div>
                 </button>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li>
-                        <a className="text-green-600 hover:text-green-700 hover:bg-green-50">Profile</a>
-                    </li>
+                    <Link to="/profile">
+                        <li>
+                            <p className="text-green-600 hover:text-green-700 hover:bg-green-50">Profile</p>
+                        </li>
+                    </Link>
                     <li>
                         <a className="text-green-600 hover:text-green-700 hover:bg-green-50">Log Out</a>
                     </li>
