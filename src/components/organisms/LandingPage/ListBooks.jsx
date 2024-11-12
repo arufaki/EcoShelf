@@ -7,7 +7,6 @@ import { useAppContext } from "../../../context/AppContext";
 const ListBooks = () => {
     const { books } = useAppContext();
     const sliceBooks = books.slice(0, 8);
-    console.log(sliceBooks);
 
     return (
         <div className="w-full px-8 text-center">

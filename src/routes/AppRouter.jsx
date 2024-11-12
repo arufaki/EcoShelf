@@ -14,8 +14,8 @@ const AppRouter = () => {
         >
             <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route path="/detail" element={<BookDetailPage />} />
                 <Route path="/books" element={<BooksPage />} />
+                <Route path="/book/:id" element={<BookDetailPage />} />
                 <Route path="/profile" element={<UserPage />} />
             </Routes>
         </Router>
