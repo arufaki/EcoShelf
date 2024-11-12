@@ -1,4 +1,4 @@
-import bookInfo from "../../../utils/bookInfo";
+import bookInfo from "../../../utils/data/bookInfo";
 import { truncateText } from "../../../utils/function/truncateText";
 
 const WishlistCard = () => {
