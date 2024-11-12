@@ -11,9 +11,8 @@ export const useFetchData = () => {
                 setBooks(JSON.parse(localBooks));
             } else {
                 const response = await fetchBooksData(API_URL);
-                const extractBooks = response.map((books) => books.volumeInfo);
-                localStorage.setItem("ecoBooks", JSON.stringify(extractBooks));
-                setBooks(extractBooks);
+                localStorage.setItem("ecoBooks", JSON.stringify(response));
+                setBooks(response);
             }
         };
         fetchBooks();
