@@ -1,12 +1,17 @@
 import { Bookmark } from "lucide-react";
 import { Link } from "react-router-dom";
+import { truncateText } from "../../../utils/function/truncateText";
 
 const Card = ({ book }) => {
     return (
-        <div className="card w-[200px] border border-green-500">
-            <figure className="p-4 cursor-pointer">
+        <div className="card w-[210px] h-[400px] border border-green-500">
+            <figure className="pt-4 px-4 cursor-pointer">
                 <img src={book.volumeInfo.imageLinks.thumbnail} alt="Book Cover" className="object-cover w-full h-60 rounded-md" />
             </figure>
+            <div>
+                <h3 className="text-green-800 font-poppins font-semibold text-sm pt-2 px-4 text-left">{truncateText(book.volumeInfo.title, 5)}</h3>
+                <p className="px-4 text-xs text-left">by {Array.isArray(book.volumeInfo?.authors) && book.volumeInfo.authors.length > 0 ? truncateText(book.volumeInfo.authors[0], 4) : "author not found"}</p>
+            </div>
             <div className="card-body p-2 flex flex-row items-center">
                 <Link to={`/book/${book.id}`} state={book} className="btn btn-success text-white flex-1">
                     View
