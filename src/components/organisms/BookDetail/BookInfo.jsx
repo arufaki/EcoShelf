@@ -1,34 +1,25 @@
 import { Star } from "lucide-react";
 import { useAppContext } from "../../../context/AppContext";
-import bookInfo from "../../../utils/bookInfo";
+import dateFormatting from "../../../utils/function/dateFormat";
+import languageConvert from "../../../utils/function/languageConvert";
+import formatISBN from "../../../utils/function/identifier";
 
-const BookInfo = () => {
+const book = ({ book }) => {
     const { reviews } = useAppContext();
 
     const totalRating = reviews.map((review) => review.rating);
     const totalStar = totalRating.reduce((acc, rating) => acc + rating, 0);
     const averageRating = Math.round(totalStar / totalRating.length);
 
-    const date = new Date(bookInfo.informationBook.publishedDate);
-
-    const formatDate = date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    });
-
-    const languageConvert = {
-        en: "English",
-        id: "Indonesian",
-    };
-
     return (
         <section className="hero py-14 border-b">
             <div className="hero-content flex-col lg:flex-row gap-16 items-center lg:items-start">
-                <img src={bookInfo.thumbnail} className="max-w-96 sm:max-w-sm md:max-w-md lg:max-w-lg w-48 text-center" />
+                <img src={book.volumeInfo.imageLinks.thumbnail} className="max-w-96 sm:max-w-sm md:max-w-md lg:max-w-lg w-48 text-center" />
                 <div className="max-w-[40rem]">
-                    <h1 className="text-4xl font-bold text-green-700 font-poppins">{bookInfo.title}</h1>
-                    <h5 className="text-green-900 my-2 font-poppins">by {bookInfo.author.join(", ")}</h5>
+                    <h1 className="text-4xl font-bold text-green-700 font-poppins">{book.volumeInfo.title}</h1>
+                    <h5 className="text-green-900 my-2 font-poppins">
+                        by {book.volumeInfo.authors?.length > 1 ? book.volumeInfo.authors.join(", ") : book.volumeInfo.authors?.[0] || "Unknown Author"}
+                    </h5>
                     <div className="flex flex-row gap-3 items-center">
                         <div className="flex flex-row gap-1">
                             {[...Array(averageRating)].map((_, index) => (
@@ -45,26 +36,23 @@ const BookInfo = () => {
                         <div className="max-w-96">
                             <div className="flex flex-row justify-between my-3 text-green-700 font-poppins">
                                 <h6>Publisher:</h6>
-                                <p>{bookInfo.informationBook.publisher}</p>
+                                <p>{book.volumeInfo.publisher}</p>
                             </div>
                             <div className="flex flex-row justify-between my-3 text-green-700 font-poppins">
                                 <h6>Published Date:</h6>
-                                <p>{formatDate}</p>
+                                <p>{dateFormatting(book.volumeInfo.publishedDate)}</p>
                             </div>
                             <div className="flex flex-row justify-between my-3 text-green-700 font-poppins">
                                 <h6>Pages:</h6>
-                                <p>{bookInfo.informationBook.pages}</p>
+                                <p>{book.volumeInfo.pageCount}</p>
                             </div>
                             <div className="flex flex-row justify-between my-3 text-green-700 font-poppins">
                                 <h6>Language:</h6>
-                                <p>{languageConvert[bookInfo.informationBook.language]}</p>
+                                <p>{languageConvert[book.volumeInfo.language]}</p>
                             </div>
                             <div className="flex flex-row justify-between my-3 text-green-700 font-poppins">
                                 <h6>ISBN:</h6>
-                                <p>{`${bookInfo.informationBook.isbn.substring(0, 3)}-${bookInfo.informationBook.isbn.substring(3, 4)}-${bookInfo.informationBook.isbn.substring(
-                                    4,
-                                    6,
-                                )}-${bookInfo.informationBook.isbn.substring(6, 12)}-${bookInfo.informationBook.isbn.substring(12)}`}</p>
+                                <p>{formatISBN(book.volumeInfo.industryIdentifiers?.[0]?.identifier)}</p>
                             </div>
                         </div>
                     </div>
@@ -78,4 +66,4 @@ const BookInfo = () => {
     );
 };
 
-export default BookInfo;
+export default book;
