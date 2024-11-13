@@ -3,6 +3,10 @@ import LandingPage from "../pages/LandingPage";
 import BookDetailPage from "../pages/BookDetailPage";
 import BooksPage from "../pages/BooksPage";
 import UserPage from "../pages/UserPage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
+import ProtectedLayout from "../layouts/ProtectedLayout";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRouter = () => {
     return (
@@ -13,10 +17,15 @@ const AppRouter = () => {
             }}
         >
             <Routes>
+                <Route path="*" element={<NotFoundPage />} />
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/books" element={<BooksPage />} />
                 <Route path="/book/:id" element={<BookDetailPage />} />
-                <Route path="/profile" element={<UserPage />} />
+                <Route element={<ProtectedLayout />}>
+                    <Route path="/profile/:uuid" element={<UserPage />} />
+                </Route>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
             </Routes>
         </Router>
     );
