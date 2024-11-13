@@ -1,7 +1,15 @@
 import { User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppContext } from "../../../context/AppContext";
 
 const ProfileHeader = () => {
+    const { user, logout } = useAppContext();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
     return (
         <div className="navbar-end">
             <button className="btn btn-ghost btn-circle text-green-600 hover:bg-green-50">
@@ -16,14 +24,24 @@ const ProfileHeader = () => {
                     </div>
                 </button>
                 <ul tabIndex={0} className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <Link to="/profile">
-                        <li>
-                            <p className="text-green-600 hover:text-green-700 hover:bg-green-50">Profile</p>
-                        </li>
-                    </Link>
-                    <li>
-                        <a className="text-green-600 hover:text-green-700 hover:bg-green-50">Log Out</a>
-                    </li>
+                    {user == null ? (
+                        <Link to="/login">
+                            <li>
+                                <p className="text-green-600 hover:text-green-700 hover:bg-green-50">Login</p>
+                            </li>
+                        </Link>
+                    ) : (
+                        <>
+                            <Link to={`/profile/${user.id}`}>
+                                <li>
+                                    <p className="text-green-600 hover:text-green-700 hover:bg-green-50">Profile</p>
+                                </li>
+                            </Link>
+                            <li onClick={handleLogout}>
+                                <a className="text-green-600 hover:text-green-700 hover:bg-green-50">Log Out</a>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </div>
         </div>
