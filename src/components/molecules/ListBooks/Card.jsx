@@ -18,7 +18,6 @@ const Card = ({ book }) => {
                 </Link>
                 <Bookmark size={32} className="cursor-pointer" stroke="green" />
             </div>
-            <p>Hello</p>
         </div>
     );
 };
