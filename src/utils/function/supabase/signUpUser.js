@@ -1,8 +1,10 @@
-const signUpUser = async ({ email, password, displayName, navigate }) => {
+import { supabase } from "../../../api/supabaseClient";
+
+const signUpUser = async (email, password, displayName, navigate) => {
     try {
         const { error } = await supabase.auth.signUp({
-            email,
-            password,
+            email: email,
+            password: password,
             options: {
                 data: {
                     display_name: displayName,

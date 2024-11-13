@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";   
+import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 import signInUser from "../utils/function/supabase/signInUser";
 import { useState } from "react";
@@ -88,7 +88,7 @@ const LoginPage = () => {
                     </form>
                 </div>
                 <div className="text-center lg:text-left hidden lg:block w-[500px]">
-                    <img src="public/images/png/ecoshelf-sopan.png" className="h-full w-full" alt="ecoshelf-character" />
+                    <img src="public/images/webp/ecoshelf-sopan.webp" className="h-full w-full" alt="ecoshelf-character" />
                 </div>
             </div>
         </div>

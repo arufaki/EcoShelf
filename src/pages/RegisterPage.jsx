@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { supabase } from "../api/supabaseClient";
 import { useState } from "react";
 import signUpUser from "../utils/function/supabase/signUpUser";
 
@@ -24,7 +23,7 @@ const RegisterPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { displayName, email, password } = register;
-        await signUpUser(displayName, email, password, navigate);
+        await signUpUser(email, password, displayName, navigate);
     };
 
     return (
@@ -85,7 +84,7 @@ const RegisterPage = () => {
                     </form>
                 </div>
                 <div className="text-center lg:text-left hidden lg:block w-[500px]">
-                    <img src="public/images/png/ecoshelf-sopan.png" className="h-full w-full" alt="ecoshelf-character" />
+                    <img src="public/images/webp/ecoshelf-sopan.webp" className="h-full w-full" alt="ecoshelf-character" />
                 </div>
             </div>
         </div>
