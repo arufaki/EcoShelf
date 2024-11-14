@@ -3,13 +3,18 @@ import { useAppContext } from "../../../context/AppContext";
 import dateFormatting from "../../../utils/function/dateFormat";
 import languageConvert from "../../../utils/function/languageConvert";
 import formatISBN from "../../../utils/function/identifier";
+import useWishlist from "../../../hooks/useWishlist";
+import Toast from "../../../utils/function/toast";
 
 const book = ({ book }) => {
+    // Average Count Book Reviews
     const { reviews } = useAppContext();
-
     const totalRating = reviews.map((review) => review.rating);
     const totalStar = totalRating.reduce((acc, rating) => acc + rating, 0);
     const averageRating = Math.round(totalStar / totalRating.length);
+
+    // Add Wishlist book from detail book
+    const { toggleWishlist, isWishlisted } = useWishlist(book, Toast);
 
     return (
         <section className="hero py-14 border-b">
@@ -57,8 +62,10 @@ const book = ({ book }) => {
                         </div>
                     </div>
                     <div className="flex flex-row gap-4">
-                        <button className="btn btn-success text-white font-poppins">Add to Reading List</button>
-                        <button className="btn btn-outline btn-success outline-none hover:!text-white font-poppins">Review this Book</button>
+                        <button className="btn btn-success text-white font-poppins" onClick={() => toggleWishlist(book)}>
+                            {isWishlisted ? "Remove Book from Wishlist" : "Add to Reading List"}
+                        </button>
+                        <button className="btn btn-outline btn-success outline-none hover:!text-white font-poppins">Give Review Book</button>
                     </div>
                 </div>
             </div>
