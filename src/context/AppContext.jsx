@@ -1,5 +1,4 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import userReviews from "../utils/data/userReview";
 import { useFetchData } from "../hooks/useFetchData";
 import { supabase } from "../api/supabaseClient";
 
@@ -7,7 +6,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
     // Global State
-    const [reviews, setReviews] = useState(userReviews);
+    const [reviews, setReviews] = useState([]);
     const [user, setUser] = useState(null);
     const [wishlist, setWishlist] = useState([]);
 
@@ -37,6 +36,26 @@ export const AppProvider = ({ children }) => {
     const deleteWishlist = (datas, book) => setWishlist(datas.filter((id) => id != book.id));
     const updateWishlist = (book) => setWishlist([...wishlist, book.id]);
 
+    // Fetch reviews
+    const fetchReviewsBook = async (book) => {
+        if (user != null) {
+            const { data, error } = await supabase.from("reviews").select("*").eq("book_id", book.id);
+            if (error) {
+                console.error("get reviews : ", error.message);
+            } else {
+                setReviews(data);
+            }
+        }
+    };
+
+    // Global function for Review
+    const addReview = (newReview) => {
+        setReviews((prevReview) => [...prevReview, newReview]);
+    };
+    const updateReview = (updatedReview) => {
+        setReviews((prevReviews) => prevReviews.map((review) => (review.id === updatedReview.id ? updatedReview : review)));
+    };
+
     const datas = {
         reviews,
         books,
@@ -46,6 +65,9 @@ export const AppProvider = ({ children }) => {
         wishlist,
         deleteWishlist,
         updateWishlist,
+        addReview,
+        fetchReviewsBook,
+        updateReview,
     };
     return <AppContext.Provider value={datas}>{children}</AppContext.Provider>;
 };
