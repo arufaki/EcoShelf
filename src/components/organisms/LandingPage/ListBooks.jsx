@@ -3,6 +3,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import Card from "../../molecules/ListBooks/Card";
 import { useAppContext } from "../../../context/AppContext";
+import { Link } from "react-router-dom";
 
 const ListBooks = () => {
     const { books } = useAppContext();
@@ -49,7 +50,9 @@ const ListBooks = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <button className="btn btn-outline btn-success outline-none hover:!text-white my-10">More Books</button>
+            <button className="btn btn-outline btn-success outline-none hover:!text-white my-10">
+                <Link to="/books">More Books</Link>
+            </button>
         </div>
     );
 };

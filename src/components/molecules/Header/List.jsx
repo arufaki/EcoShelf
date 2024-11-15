@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const List = () => {
+const List = ({ handleAbout }) => {
+    const location = useLocation();
     return (
         <div className="navbar-start">
             <div className="dropdown">
@@ -20,10 +21,13 @@ const List = () => {
                             <p className="text-green-600 hover:text-green-700 hover:bg-green-50">Books</p>
                         </li>
                     </Link>
-
-                    <li>
-                        <p className="text-green-600 hover:text-green-700 hover:bg-green-50">About</p>
-                    </li>
+                    {location.pathname === "/" && (
+                        <li>
+                            <p className="text-green-600 hover:text-green-700 hover:bg-green-50" onClick={handleAbout}>
+                                About
+                            </p>
+                        </li>
+                    )}
                 </ul>
             </div>
         </div>
