@@ -7,7 +7,7 @@ export const useFetchData = () => {
     useEffect(() => {
         const fetchBooks = async () => {
             const localBooks = localStorage.getItem("ecoBooks");
-            if (localBooks) {
+            if (localBooks && JSON.parse(localBooks).length > 0) {
                 setBooks(JSON.parse(localBooks));
             } else {
                 const response = await fetchBooksData(API_URL);
