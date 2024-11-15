@@ -37,14 +37,22 @@ export const AppProvider = ({ children }) => {
     const updateWishlist = (book) => setWishlist([...wishlist, book.id]);
 
     // Fetch reviews
-    const fetchReviewsBook = async (book) => {
-        if (user != null) {
-            const { data, error } = await supabase.from("reviews").select("*").eq("book_id", book.id);
-            if (error) {
-                console.error("get reviews : ", error.message);
-            } else {
-                setReviews(data);
-            }
+    const fetchReviewsBook = async (book, userFilter = null) => {
+        let query = supabase.from("reviews").select("*");
+
+        if (book) {
+            query = query.eq("book_id", book.id);
+        }
+
+        if (userFilter) {
+            query = query.eq("user_id", userFilter.id);
+        }
+
+        const { data, error } = await query;
+        if (error) {
+            console.error("Get Review", error.message);
+        } else {
+            setReviews(data);
         }
     };
 
@@ -54,6 +62,14 @@ export const AppProvider = ({ children }) => {
     };
     const updateReview = (updatedReview) => {
         setReviews((prevReviews) => prevReviews.map((review) => (review.id === updatedReview.id ? updatedReview : review)));
+    };
+    const deleteReview = async (reviewId) => {
+        const { error } = await supabase.from("reviews").delete().eq("id", reviewId);
+        if (error) {
+            console.error("Delete Review Error : ", error.message);
+        } else {
+            setReviews((prevReviews) => prevReviews.filter((review) => review.id !== reviewId));
+        }
     };
 
     const datas = {
@@ -68,6 +84,7 @@ export const AppProvider = ({ children }) => {
         addReview,
         fetchReviewsBook,
         updateReview,
+        deleteReview,
     };
     return <AppContext.Provider value={datas}>{children}</AppContext.Provider>;
 };
