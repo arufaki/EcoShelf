@@ -1,6 +1,8 @@
-const About = () => {
+import { forwardRef } from "react";
+
+const About = forwardRef((props, ref) => {
     return (
-        <>
+        <section ref={ref}>
             <h1 className="text-4xl sm:text-5xl font-bold text-green-700 text-center pt-14">Why EcoShelf Exists ?</h1>
             <div className="hero pb-14 border-b">
                 <div className="hero-content flex-col lg:flex-row gap-16 md:gap-28 ">
@@ -22,8 +24,8 @@ const About = () => {
                     <img src="/images/webp/ecoshelf-about.webp" className="max-w-80 sm:max-w-sm md:max-w-md lg:max-w-lg" />
                 </div>
             </div>
-        </>
+        </section>
     );
-};
+});
 
 export default About;
