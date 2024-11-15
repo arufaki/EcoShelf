@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 import { supabase } from "../api/supabaseClient";
-import { useEffect } from "react";
 
 const useWishlist = (book, Toast) => {
     const { user, wishlist, deleteWishlist, updateWishlist } = useAppContext();
