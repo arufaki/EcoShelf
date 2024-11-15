@@ -12,7 +12,7 @@ const UserPage = () => {
             <Main className="max-w-[1440px] mx-auto">
                 <UserProfile />
                 <Wishlist />
-                <BookReviews title="Review History" userProfile={true} />
+                <BookReviews title="Review History" userProfile={true} filterByUser={true} />
             </Main>
             <Footer />
         </>
