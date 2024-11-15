@@ -16,66 +16,6 @@ const BookModal = ({ book }) => {
 
     const { formReview, existReview, handleChange, handleSubmit } = useReview(book, closeModal);
 
-    // useEffect(() => {
-    //     const checkExistReview = async () => {
-    //         const { data, error } = await supabase.from("reviews").select("*").eq("user_id", user.id).eq("book_id", book.id).maybeSingle();
-    //         if (error && error.code !== "PGRST116") {
-    //             console.error(error.message);
-    //         } else {
-    //             setExistReview(data);
-    //             setFormReview({
-    //                 rating: data?.rating ?? 3,
-    //                 review: data?.review ?? "",
-    //             });
-    //         }
-    //     };
-
-    //     if (user) checkExistReview();
-    // }, [user, reviews]);
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormReview((prevData) => ({
-    //         ...prevData,
-    //         [name]: name === "rating" ? parseInt(value) : value,
-    //     }));
-    // };
-
-    // const handleSubmit = async () => {
-    //     const { rating, review } = formReview;
-
-    //     if (existReview) {
-    //         const { data, error } = await supabase.from("reviews").update({ rating, review }).eq("id", existReview.id).select();
-    //         if (error) {
-    //             console.error("Error mengupdate ulasan:", error.message);
-    //         } else {
-    //             updateReview(data[0]);
-    //             closeModal();
-    //         }
-    //     } else {
-    //         const { data, error } = await supabase
-    //             .from("reviews")
-    //             .insert([
-    //                 {
-    //                     user_id: user.id,
-    //                     user_name: user.user_metadata.display_name,
-    //                     book_id: book.id,
-    //                     rating,
-    //                     review,
-    //                 },
-    //             ])
-    //             .select();
-
-    //         if (error) {
-    //             console.error("error tambah buku : ", error.message);
-    //         } else {
-    //             addReview(data[0]);
-    //             setExistReview(data[0]);
-    //             setFormReview({ rating: 3, review: "" });
-    //             closeModal();
-    //         }
-    //     }
-    // };
     return (
         <div>
             <button className="btn btn-outline btn-success outline-none hover:!text-white font-poppins" onClick={openModal}>
