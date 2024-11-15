@@ -5,13 +5,14 @@ import languageConvert from "../../../utils/function/languageConvert";
 import formatISBN from "../../../utils/function/identifier";
 import useWishlist from "../../../hooks/useWishlist";
 import Toast from "../../../utils/function/toast";
+import BookModal from "../../molecules/Modal/BookModal";
 
 const book = ({ book }) => {
     // Average Count Book Reviews
-    const { reviews } = useAppContext();
+    const { user, reviews } = useAppContext();
     const totalRating = reviews.map((review) => review.rating);
     const totalStar = totalRating.reduce((acc, rating) => acc + rating, 0);
-    const averageRating = Math.round(totalStar / totalRating.length);
+    const averageRating = Math.round(totalStar / totalRating.length) || 0;
 
     // Add Wishlist book from detail book
     const { toggleWishlist, isWishlisted } = useWishlist(book, Toast);
@@ -26,14 +27,15 @@ const book = ({ book }) => {
                         by {book.volumeInfo.authors?.length > 1 ? book.volumeInfo.authors.join(", ") : book.volumeInfo.authors?.[0] || "Unknown Author"}
                     </h5>
                     <div className="flex flex-row gap-3 items-center">
-                        <div className="flex flex-row gap-1">
-                            {[...Array(averageRating)].map((_, index) => (
-                                <Star key={index} fill="green" stroke="green" />
-                            ))}
-                            {[...Array(5 - totalRating.length)].map((_, index) => (
-                                <Star key={index} stroke="green" />
-                            ))}
-                        </div>
+                        {user == null ? (
+                            <p className="text-red-500 font-poppins">You must login to see the rating</p>
+                        ) : (
+                            <div className="flex flex-row gap-1">
+                                {[...Array(5)].map((_, index) => (
+                                    <Star key={index} fill={index < averageRating ? "green" : "none"} stroke="green" />
+                                ))}
+                            </div>
+                        )}
                         <p className="text-green-900 font-poppins">({reviews.length} reviews)</p>
                     </div>
                     <div className="my-5">
@@ -65,7 +67,7 @@ const book = ({ book }) => {
                         <button className="btn btn-success text-white font-poppins" onClick={() => toggleWishlist(book)}>
                             {isWishlisted ? "Remove Book from Wishlist" : "Add to Reading List"}
                         </button>
-                        <button className="btn btn-outline btn-success outline-none hover:!text-white font-poppins">Give Review Book</button>
+                        <BookModal book={book} />
                     </div>
                 </div>
             </div>
