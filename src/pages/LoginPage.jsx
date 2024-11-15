@@ -88,7 +88,7 @@ const LoginPage = () => {
                     </form>
                 </div>
                 <div className="text-center lg:text-left hidden lg:block w-[500px]">
-                    <img src="public/images/webp/ecoshelf-sopan.webp" className="h-full w-full" alt="ecoshelf-character" />
+                    <img src="/images/webp/ecoshelf-sopan.webp" className="h-full w-full" alt="ecoshelf-character" />
                 </div>
             </div>
         </div>
