@@ -7,6 +7,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProtectedLayout from "../layouts/ProtectedLayout";
 import NotFoundPage from "../pages/NotFoundPage";
+import ScrollToTop from "../components/organisms/Reusable/ScrollToTop";
 
 const AppRouter = () => {
     return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
                 v7_startTransition: true,
             }}
         >
+            <ScrollToTop />
             <Routes>
                 <Route path="*" element={<NotFoundPage />} />
                 <Route path="/" element={<LandingPage />} />
