@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchBooksData } from "../api/booksApi";
-import API_URL from "../utils/data/constants";
+import { API_URL } from "../utils/data/constants";
 
 export const useFetchData = () => {
     const [books, setBooks] = useState([]);

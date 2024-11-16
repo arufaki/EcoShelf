@@ -1,3 +1,5 @@
+import ChatModal from "../../molecules/Modal/ChatModal";
+
 const Hero = () => {
     return (
         <div className="hero py-14 border-b lg:min-h-screen">
@@ -11,7 +13,7 @@ const Hero = () => {
                     </p>
                     <div className="flex flex-row gap-4">
                         <button className="btn btn-success text-white">Get Started</button>
-                        <button className="btn btn-outline btn-success outline-none hover:!text-white">Chat with AI Book</button>
+                        <ChatModal />
                     </div>
                 </div>
             </div>
