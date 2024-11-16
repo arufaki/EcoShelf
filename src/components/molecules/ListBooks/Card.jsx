@@ -8,7 +8,7 @@ const Card = ({ book }) => {
     const { toggleWishlist, isWishlisted } = useWishlist(book, Toast);
 
     return (
-        <div className="card w-[210px] h-[400px] border border-green-500">
+        <div className="card w-[260px] h-[400px] border border-green-500">
             <figure className="pt-4 px-4 cursor-pointer">
                 <img src={book.volumeInfo.imageLinks.thumbnail} alt="Book Cover" className="object-cover w-full h-60 rounded-md" />
             </figure>

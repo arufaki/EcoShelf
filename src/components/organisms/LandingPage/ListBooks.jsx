@@ -19,25 +19,21 @@ const ListBooks = () => {
                     clickable: true,
                 }}
                 breakpoints={{
-                    475: {
+                    605: {
                         slidesPerView: 2,
                         spaceBetween: 10,
                     },
-                    690: {
+                    882: {
                         slidesPerView: 3,
                         spaceBetween: 10,
                     },
 
-                    890: {
+                    1155: {
                         slidesPerView: 4,
                         spaceBetween: 10,
                     },
-                    1200: {
+                    1400: {
                         slidesPerView: 5,
-                        spaceBetween: 10,
-                    },
-                    1440: {
-                        slidesPerView: 6,
                         spaceBetween: 10,
                     },
                 }}
