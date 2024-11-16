@@ -3,6 +3,7 @@ import { truncateText } from "../../../utils/function/truncateText";
 import { Link } from "react-router-dom";
 import Toast from "../../../utils/function/toast";
 import useWishlist from "../../../hooks/useWishlist";
+import BookModal from "../Modal/BookModal";
 
 const WishlistCard = ({ book }) => {
     const { toggleWishlist, isWishlisted } = useWishlist(book, Toast);
@@ -26,7 +27,7 @@ const WishlistCard = ({ book }) => {
                 <p className="py-2 font-poppins text-green-950">{truncateText(book.volumeInfo?.description || "Synopsis Not Found", 10)}</p>
             </div>
             <div className="flex flex-row justify-between">
-                <button className="btn btn-success text-white">Review Book</button>
+                <BookModal book={book} disableButton={true} />
                 <Bookmark size={36} className="cursor-pointer" stroke="green" onClick={() => toggleWishlist(book)} fill={isWishlisted ? "green" : "none"} />
             </div>
         </div>
