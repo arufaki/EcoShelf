@@ -13,7 +13,9 @@ const ChatModal = () => {
     const { books, user } = useAppContext();
     const navigate = useNavigate();
 
-    const genAI = initGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+    const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+    const genAI = initGenerativeAI(geminiKey);
 
     const generate = async () => {
         try {
