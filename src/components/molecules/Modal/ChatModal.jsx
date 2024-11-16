@@ -1,12 +1,18 @@
 import BubbleChat from "../BubbleChat/BubbleChat";
-import { generationConfig, initGenerativeAI, safetySettings } from "../../../services/generativeAI";
+import { generationConfig, initGenerativeAI, safetySettings } from "../../../services/gemini/generativeAI";
 import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "../../../context/AppContext";
 import { DEFAULT_PROMPT } from "../../../utils/data/constants";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const ChatModal = () => {
-    const [input, setInput] = useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm();
     const [response, setResponse] = useState([]);
     const bottom = useRef(null);
 
@@ -17,7 +23,7 @@ const ChatModal = () => {
 
     const genAI = initGenerativeAI(geminiKey);
 
-    const generate = async () => {
+    const generate = async (input) => {
         try {
             const hit = await genAI.generateContent(DEFAULT_PROMPT(books, input), generationConfig, safetySettings);
             const resAI = hit.response.text();
@@ -28,11 +34,17 @@ const ChatModal = () => {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setResponse((prevRes) => [...prevRes, { prompt: input, response: "Typing..." }]);
-        generate();
-        setInput("");
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     setResponse((prevRes) => [...prevRes, { prompt: input, response: "Typing..." }]);
+    //     generate();
+    //     setInput("");
+    // };
+
+    const onSubmit = (data) => {
+        setResponse((prevRes) => [...prevRes, { prompt: data.input, response: "Typing..." }]);
+        generate(data.input);
+        reset();
     };
 
     const closeModal = () => {
@@ -64,10 +76,16 @@ const ChatModal = () => {
                         </button>
                     </div>
                     <BubbleChat response={response} ref={bottom} />
-                    <form className="flex flex-row gap-x-3" onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Type here" onChange={(e) => setInput(e.target.value)} value={input} className="input input-bordered w-full bg-white focus:outline-none" />
+                    <form className="flex flex-row gap-x-3" onSubmit={handleSubmit(onSubmit)}>
+                        <input
+                            type="text"
+                            placeholder="Type here"
+                            {...register("input", { required: "This field is required", minLength: { value: 10, message: "Prompt must be at least 10 characters" } })}
+                            className="input input-bordered w-full bg-white focus:outline-none"
+                        />
                         <button className="btn btn-success text-white font-poppins">Send Message</button>
                     </form>
+                    {errors.input && <p className="text-red-500 text-sm">{errors.input.message}</p>}
                 </div>
             </dialog>
         </>
