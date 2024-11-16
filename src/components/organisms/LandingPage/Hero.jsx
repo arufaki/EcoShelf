@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ChatModal from "../../molecules/Modal/ChatModal";
 
 const Hero = () => {
@@ -12,7 +13,9 @@ const Hero = () => {
                         make positive changes for a greener planet.
                     </p>
                     <div className="flex flex-row gap-4">
-                        <button className="btn btn-success text-white">Get Started</button>
+                        <Link to="/books" className="btn btn-success text-white">
+                            Get Started
+                        </Link>
                         <ChatModal />
                     </div>
                 </div>
