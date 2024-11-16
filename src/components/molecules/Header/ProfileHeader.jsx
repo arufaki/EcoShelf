@@ -1,14 +1,19 @@
 import { User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../../context/AppContext";
+import signOutUser from "../../../services/supabase/signOutUser";
+import { logoutAlert } from "../../../utils/function/toast";
 
 const ProfileHeader = () => {
     const { user, logout } = useAppContext();
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        logout();
-        navigate("/login");
+        logoutAlert(() => {
+            logout();
+            signOutUser();
+            navigate("/login");
+        });
     };
     return (
         <div className="navbar-end">

@@ -1,46 +1,43 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
-import signInUser from "../utils/function/supabase/signInUser";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import signInUser from "../services/supabase/signInUser";
+import { Toast } from "../utils/function/toast";
 
 const LoginPage = () => {
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    });
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
     const [isLoading, setIsloading] = useState(false);
     const [error, setError] = useState(null);
-    const [rememberMe, setRememberMe] = useState(false);
 
     const navigate = useNavigate();
     const { login } = useAppContext();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const { email, password } = formData;
-
+    const onSubmit = async (data) => {
         setIsloading(true);
-        const user = await signInUser(email, password, setError, setIsloading);
+        const user = await signInUser(data.email, data.password, setError, setIsloading);
+
         if (user) {
             login(user);
             navigate("/");
+            Toast.fire({
+                icon: "success",
+                title: "Login Success",
+            });
         }
     };
+
     return (
         <div className="hero bg-white h-screen overflow-y-hidden">
             <div className="hero-content flex-col lg:flex-row-reverse items-center">
                 <div className="card bg-white shrink-0 shadow-2xl h-full w-96">
                     <h1 className="text-green-700 font-poppins font-bold text-4xl mx-auto py-3">Sign In</h1>
-                    <form className="card-body" onSubmit={handleSubmit}>
+                    <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-green-700">Email</span>
@@ -48,11 +45,17 @@ const LoginPage = () => {
                             <input
                                 type="email"
                                 placeholder="email"
-                                name="email"
-                                onChange={handleChange}
+                                // name="email"
+                                {...register("email", {
+                                    required: "Email Address is required",
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                        message: "Please enter a valid email address",
+                                    },
+                                })}
                                 className="input input-bordered bg-white border-green-500 focus:ring-2 focus:ring-green-500"
-                                required
                             />
+                            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -61,11 +64,13 @@ const LoginPage = () => {
                             <input
                                 type="password"
                                 placeholder="password"
-                                onChange={handleChange}
-                                name="password"
+                                {...register("password", {
+                                    required: "Password is required",
+                                    minLength: { value: 6, message: "Password must be at least 6 characters" },
+                                })}
                                 className="input input-bordered bg-white border-green-500 focus:ring-2 focus:ring-green-500"
-                                required
                             />
+                            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                         </div>
                         <div className="flex">
                             <label className="cursor-pointer label">
