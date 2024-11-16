@@ -1,4 +1,5 @@
-import { supabase } from "../../../api/supabaseClient";
+import { supabase } from "../../api/supabaseClient";
+import { Toast } from "../../utils/function/toast";
 
 const signInUser = async (email, password, setError, setIsLoading) => {
     try {
@@ -7,7 +8,10 @@ const signInUser = async (email, password, setError, setIsLoading) => {
         return data.user;
     } catch (error) {
         setError(error.message);
-        console.error(error.message);
+        Toast.fire({
+            icon: "error",
+            title: `${error.message}`,
+        });
     } finally {
         setIsLoading(false);
     }

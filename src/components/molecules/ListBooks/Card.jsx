@@ -2,7 +2,7 @@ import { Bookmark } from "lucide-react";
 import { Link } from "react-router-dom";
 import { truncateText } from "../../../utils/function/truncateText";
 import useWishlist from "../../../hooks/useWishlist";
-import Toast from "../../../utils/function/toast";
+import { Toast } from "../../../utils/function/toast";
 
 const Card = ({ book }) => {
     const { toggleWishlist, isWishlisted } = useWishlist(book, Toast);

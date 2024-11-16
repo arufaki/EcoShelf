@@ -4,8 +4,8 @@ import dateFormatting from "../../../utils/function/dateFormat";
 import languageConvert from "../../../utils/function/languageConvert";
 import formatISBN from "../../../utils/function/identifier";
 import useWishlist from "../../../hooks/useWishlist";
-import Toast from "../../../utils/function/toast";
 import BookModal from "../../molecules/Modal/BookModal";
+import { Toast } from "../../../utils/function/toast";
 
 const book = ({ book }) => {
     // Average Count Book Reviews

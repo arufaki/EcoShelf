@@ -3,7 +3,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const mySwal = withReactContent(Swal);
 
-const Toast = mySwal.mixin({
+export const Toast = mySwal.mixin({
     toast: true,
     position: "top-end",
     showConfirmButton: false,
@@ -11,4 +11,18 @@ const Toast = mySwal.mixin({
     timerProgressBar: true,
 });
 
-export default Toast;
+export const logoutAlert = (logoutAction) => {
+    Swal.fire({
+        title: "Are you sure you want to logout?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, logout!",
+        cancelButtonText: "No, stay logged in",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            logoutAction();
+        } else {
+            console.log("Logout canceled");
+        }
+    });
+};

@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useFetchData } from "../hooks/useFetchData";
 import { supabase } from "../api/supabaseClient";
+import { Toast } from "../utils/function/toast";
 
 const AppContext = createContext();
 
@@ -69,6 +70,10 @@ export const AppProvider = ({ children }) => {
             console.error("Delete Review Error : ", error.message);
         } else {
             setReviews((prevReviews) => prevReviews.filter((review) => review.id !== reviewId));
+            Toast.fire({
+                icon: "success",
+                title: "Delete Review Success",
+            });
         }
     };
 
