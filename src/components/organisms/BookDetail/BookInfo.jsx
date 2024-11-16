@@ -27,15 +27,11 @@ const book = ({ book }) => {
                         by {book.volumeInfo.authors?.length > 1 ? book.volumeInfo.authors.join(", ") : book.volumeInfo.authors?.[0] || "Unknown Author"}
                     </h5>
                     <div className="flex flex-row gap-3 items-center">
-                        {user == null ? (
-                            <p className="text-red-500 font-poppins">You must login to see the rating</p>
-                        ) : (
-                            <div className="flex flex-row gap-1">
-                                {[...Array(5)].map((_, index) => (
-                                    <Star key={index} fill={index < averageRating ? "green" : "none"} stroke="green" />
-                                ))}
-                            </div>
-                        )}
+                        <div className="flex flex-row gap-1">
+                            {[...Array(5)].map((_, index) => (
+                                <Star key={index} fill={index < averageRating ? "green" : "none"} stroke="green" />
+                            ))}
+                        </div>
                         <p className="text-green-900 font-poppins">({reviews.length} reviews)</p>
                     </div>
                     <div className="my-5">
