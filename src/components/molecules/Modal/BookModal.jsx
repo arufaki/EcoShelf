@@ -2,7 +2,7 @@ import { useAppContext } from "../../../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import useReview from "../../../hooks/useReview";
 
-const BookModal = ({ book }) => {
+const BookModal = ({ book, disableButton }) => {
     const navigate = useNavigate();
     const { user } = useAppContext();
 
@@ -18,7 +18,11 @@ const BookModal = ({ book }) => {
 
     return (
         <div>
-            <button className="btn btn-outline btn-success outline-none hover:!text-white font-poppins" onClick={openModal}>
+            <button
+                className="btn btn-outline btn-success outline-none hover:!text-white font-poppins disabled:text-white disabled:btn-outline disabled:cursor-pointer"
+                onClick={openModal}
+                disabled={disableButton}
+            >
                 {existReview ? "Edit Your Review" : "Write a Review"}
             </button>
             <dialog id="my_modal_1" className="modal">
