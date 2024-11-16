@@ -59,14 +59,6 @@ const BookReviews = ({ title, userProfile, book, filterByUser = false }) => {
                                     )}
                                 </div>
                             ))
-                    ) : user == null ? (
-                        <p className="font-poppins">
-                            Must be{" "}
-                            <Link to="/login" className="underline text-green-900">
-                                Login
-                            </Link>{" "}
-                            if you wanna check review books
-                        </p>
                     ) : (
                         <p className="font-poppins">Reviews Not Found</p>
                     )}
