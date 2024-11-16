@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../api/supabaseClient";
 import { useAppContext } from "../context/AppContext";
+import { Toast } from "../utils/function/toast";
 
 const useReview = (book, closeModal) => {
     const { user, addReview, reviews, updateReview } = useAppContext();
@@ -43,9 +44,17 @@ const useReview = (book, closeModal) => {
             const { data, error } = await supabase.from("reviews").update({ rating, review }).eq("id", existReview.id).select();
             if (error) {
                 console.error("Error mengupdate ulasan:", error.message);
+                Toast.fire({
+                    icon: "error",
+                    title: `${error.message}`,
+                });
             } else {
                 updateReview(data[0]);
                 closeModal();
+                Toast.fire({
+                    icon: "success",
+                    title: "Update Review Successfully",
+                });
             }
         } else {
             const { data, error } = await supabase
@@ -62,12 +71,20 @@ const useReview = (book, closeModal) => {
                 .select();
 
             if (error) {
-                console.error("error tambah buku : ", error.message);
+                console.error("error insert book review : ", error.message);
+                Toast.fire({
+                    icon: "error",
+                    title: `${error.message}`,
+                });
             } else {
                 addReview(data[0]);
                 setExistReview(data[0]);
                 setFormReview({ rating: 3, review: "" });
                 closeModal();
+                Toast.fire({
+                    icon: "success",
+                    title: "Add Review Successfully",
+                });
             }
         }
     };
