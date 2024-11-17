@@ -13,7 +13,7 @@ const Hero = () => {
                         make positive changes for a greener planet.
                     </p>
                     <div className="flex flex-row gap-4">
-                        <Link to="/books" className="btn btn-success text-white">
+                        <Link to="/login" className="btn btn-success text-white">
                             Get Started
                         </Link>
                         <ChatModal />
