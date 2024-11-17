@@ -24,7 +24,7 @@ const LoginPage = () => {
 
         if (user) {
             login(user);
-            navigate("/");
+            navigate("/books");
             Toast.fire({
                 icon: "success",
                 title: "Login Success",
