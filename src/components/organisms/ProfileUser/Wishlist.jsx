@@ -44,7 +44,7 @@ const Wishlist = () => {
                     ))}
                 </Swiper>
             ) : (
-                <p className="text-center text-green-950 text-xl font-poppins font-semibold">You don't have a wishlist yet</p>
+                <p className="text-center text-green-950 text-xl font-poppins font-semibold h-[400px] flex justify-center items-center">You don't have a wishlist yet</p>
             )}
         </section>
     );
